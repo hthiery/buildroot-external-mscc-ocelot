@@ -1,0 +1,28 @@
+From 1fb79ef885ea5e2e2dd05a1dc3c98eadce5365aa Mon Sep 17 00:00:00 2001
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Mon, 29 Apr 2019 10:53:09 +0200
+Subject: [PATCH] fix initrd offsets
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+---
+ drivers/of/fdt.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/of/fdt.c b/drivers/of/fdt.c
+index 800ad252cf9c..163817f0bc04 100644
+--- a/drivers/of/fdt.c
++++ b/drivers/of/fdt.c
+@@ -896,8 +896,8 @@ const void * __init of_flat_dt_match_machine(const void *default_match,
+ static void __early_init_dt_declare_initrd(unsigned long start,
+ 					   unsigned long end)
+ {
+-	initrd_start = (unsigned long)__va(start);
+-	initrd_end = (unsigned long)__va(end);
++	initrd_start = (unsigned long)(start);
++	initrd_end = (unsigned long)(end);
+ 	initrd_below_start_ok = 1;
+ }
+ #endif
+-- 
+2.11.0
+
